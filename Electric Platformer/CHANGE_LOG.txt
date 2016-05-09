@@ -1,0 +1,47 @@
+This document will keep track of the changes and organization of the code.
+
+/*************************************
+SATURDAY MAY 7TH, 12:25 AM (Brent)
+**************************************/
+
+There are now two separate scenes.
+
+*********************
+SCENE 1: Attractor Demo
+*********************
+There is a player object (white square) that can move around with WSAD
+
+A function in PlayerControl.cs checks for intersection with an attractor. If there is an intersection, then we modify the force acting on the block accordingly. We also change the color of the block according to its charge. 
+
+ADDED FEATURES:
+	-Added color changing when the charge is changed (PlayControl.cs 44-67)
+	-Added a sound effect on jumping (Uploaded a new sound effect "And added to Zip" in attractor) 
+
+WORK TO DO:
+	-Add the sprites into the blocks
+	-Right now, the sound only occurs when you cross a border. Maybe we want to add something for if you change while you're already inside?
+
+*********************
+SCENE 2: Attractive Ceiling
+*********************
+
+The ceiling is a series of boxes that are all adjacent to each other. Each box has its own rectangular collision field around it, with a single point charge located above the box to apply the force. These are childs of the "ceiling" object, which is an empty object.
+
+Upon hitting the ceiling, the box triggers "on ceiling" which reverses the direction of its jump. After one of these jumps, normal jumping functionality is restored. 
+
+In this scene, the player must use the ceiling to traverse the gap that they wouldn't be able to cross using just the attractor. A cool version would be one where you need to use the attractor to boost yourself up to the ceiling.
+
+ADDED FEATURES:
+	-Started this scene in its entirety
+WORK TO DO:
+	-Add the sprites
+	-With the current implementation, the sound method used for scene 1 will not work. So we either need to find a new way to add sound into the scene or not worry about having it for the ceiling. 
+
+*********************
+General Notes
+*********************
+-Let's look to add particle effects soon? I think that we can do something similar to how the sounds work when we collide with the attractor. But we would need to solve the issue of what happens if you are in the field already when you switch polarity. I think that since we have the reference to the player in all of the field, we might just be able to flip some public variable that tells you when you're inside an electric field. 
+
+Then it's just a matter of animating the particle effects in.
+
+I added a random background music track that loops. It got really annoying as I was debugging, so it is currently turned off. 
